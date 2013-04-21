@@ -4,7 +4,7 @@ var Crafty = require('./lib/crafty');
 Crafty.c('Bounded', {
   init: function() {
     this.requires('2D, Canvas');
-    this.bind('Moved', function(from) {
+    this.bind('EnterFrame', function(from) {
       if(this.isOutOfBounds()) {
           this.trigger('HitBounds');
           this.attr({
