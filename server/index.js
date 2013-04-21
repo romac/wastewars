@@ -65,8 +65,12 @@ var server = {
         var size = { w: 20, h: 20 },
             coords = shared.randomOffscreenCoordinates(viewport, size);
         server.rpc('spawn', 'Satellite', {x: coords.x, y: coords.y, w: size.w, h: size.h});
-      }, 800);
+      }, 1000);
     }
+  },
+
+  updateShip: function(id, attr) {
+    this.rpc('updateShip', id, attr);
   },
 
   gameOver: function(id) {

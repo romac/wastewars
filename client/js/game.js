@@ -4,7 +4,7 @@ var Crafty = require('./lib/crafty'),
 
 require('./loading');
 require('./actor');
-require('./ship');
+require('./playership');
 require('./planet');
 require('./satellite');
 
@@ -31,7 +31,7 @@ var Game = module.exports = {
 };
 
 Crafty.scene('Game', function() {
-  this.player = Crafty.e('Ship');
+  this.player = Crafty.e('PlayerShip');
   this.player.x = -200;
   this.player.y = -100;
   this.planet = Crafty.e('Planet');

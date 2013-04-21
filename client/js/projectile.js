@@ -28,8 +28,6 @@ Crafty.c('Projectile', {
   },
 
   target: function(entity) {
-    console.log(entity);
-    console.log(entity.x);
       var pos = new Crafty.math.Vector2D(this.x, this.y),
           target = new Crafty.math.Vector2D(entity.x, entity.y),
           angle = pos.angleTo(target);

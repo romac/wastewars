@@ -18,6 +18,9 @@ module.exports = {
   bindEvents: function() {
     Crafty.bind('Ready', this.callMethod('ready'));
     Crafty.bind('GameOver', this.callMethod('gameOver'));
+    Crafty.bind('UpdateShip', function(ship) {
+      this.callMethod('updateShip', ship)();
+    }.bind(this));
   },
 
   callMethod: function(method /*, params... */) {
@@ -32,7 +35,6 @@ module.exports = {
 
   onMessage: function(e) {
     var data = JSON.parse(e.data);
-    console.log(data);
     if(!data || !data.method || !this[data.method]) {
       console.error('Error: cannot call method: ', data && data.method);
       return;
@@ -44,10 +46,23 @@ module.exports = {
     this.id = id;
   },
 
-  spawn: function(type, attr) {
-    console.log(type, attr);
-    Crafty.e(type).attr(attr || {}).go();
+  ships: {},
+
+  updateShip: function(id, attr) {
+    if (!this.ships[id]) {
+      this.ships[id] = Crafty.e('NetShip');
+    }
+    this.ships[id].attr(attr);
   },
+
+  spawn: function(type, attr) {
+    var obj = Crafty.e(type);
+    obj.attr(attr || {});
+    if (typeof obj.go === 'function') {
+        obj.go();
+    }
+  },
+
 
   play: function() {
     Crafty.scene('Game');
