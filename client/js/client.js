@@ -13,8 +13,9 @@ module.exports = {
 
   onMessage: function(e) {
     var data = JSON.parse(e.data);
+    console.log(data);
     if(!data || !data.method || !this[data.method]) {
-      console.error('Error, cannot call method: ', data || data.method || this[data.method]);
+      console.error('Error: cannot call method: ', data || data.method || this[data.method]);
       return;
     }
     this[data.method].apply(this,data.params);
@@ -22,6 +23,11 @@ module.exports = {
 
   setID: function(id) {
     this.id = id;
+  },
+
+  spawn: function(type, attr) {
+    console.log(type, attr);
+    Crafty.e(type).attr(attr || {});
   }
 };
 
