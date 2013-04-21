@@ -32,18 +32,24 @@ var Game = module.exports = {
 
 Crafty.scene('Game', function() {
   this.player = Crafty.e('PlayerShip');
-  this.player.x = -200;
-  this.player.y = -100;
+  this.player.attr({ x: Crafty.math.randomInt(-350, 350), y: Crafty.math.randomInt(-100, -250) });
+  this.player.go();
   this.planet = Crafty.e('Planet');
   this.planet.bind('Die', function() {
     Crafty.trigger('GameOver');
   });
-  
   Crafty.viewport.centerOn(this.planet, 1); 
 });
 
 Crafty.bind('GameOver', function() {
-  Crafty.stop();
+  Crafty('Actor').destroy();
+  Crafty.scene('GameOver');
+});
+
+Crafty.scene('GameOver', function() {
+  Crafty.e('2D, DOM, Text')
+    .attr({x: -50, y: -10, w: 200, h: 20})
+    .text('Game OVER!');
 });
 
 window.addEventListener('load', Game.start);

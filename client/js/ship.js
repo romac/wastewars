@@ -6,7 +6,7 @@ require( './bounded' );
 Crafty.c('Ship', {
   name: 'Ship',
   init: function() {
-    this.requires('Actor, Color, Collision');
+    this.requires('Actor, Color, Shooter, Collision');
     this.attr({
       w: 10,
       h: 20,
@@ -17,7 +17,12 @@ Crafty.c('Ship', {
     });
     this.color('white');
 
-    this.bind('StartShooting', this._shoot);
+    this.bind('Change', function(props) {
+      if(props.isShooting) {
+        this.trigger('StartShooting');
+      }
+    });
+    this._shoot();
     this.bind('HitBounds', this.stopMovement);
   },
 
@@ -25,17 +30,20 @@ Crafty.c('Ship', {
     return {
       x: this.x,
       y: this.y,
-      curAngle: this.curAngle,
-      health: this.health
-    }
+      rotation: this.rotation,
+      _dirAngle: this._dirAngle,
+      health: this.health,
+      isShooting: this.isShooting,
+      origin: this.origin
+    };
   },
 
   _shoot: function()
   {
+    this.timeout(this._shoot, 80);
     if(!this.isShooting) {
       return;
     }
-    this.shoot(this.getAngle(), 5);
-    this.timeout(this._shoot, 80);
+    this.shoot(this._dirAngle + Math.PI, 5);
   }
 } );

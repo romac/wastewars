@@ -58,8 +58,7 @@ var server = {
   ready: function(id) {
     this.clientsReady++;
     this.clients[id].ready = true;
-    console.log('ready: %d, num: %d', this.clientsReady, this.clientsNum);
-    if( this.clientsReady == this.clientsNum ) {
+    if(this.clientsReady === this.clientsNum) {
       this.rpc('play');
       setInterval(function() {
         var size = { w: 20, h: 20 },
@@ -73,6 +72,10 @@ var server = {
     this.rpc('updateShip', id, attr);
   },
 
+  destroyShip: function(id) {
+    this.rpc('destroyShip', id);
+  },
+
   gameOver: function(id) {
     console.log('GameOVER!');
   }
@@ -80,6 +83,7 @@ var server = {
 
 wsServer.on('connection', function(ws) {
   console.log('Client connected!');
+  server.addClient(ws);
   ws.on('message', function(msg) {
     console.log('Received: %s', msg);
     var data = JSON.parse(msg);
@@ -94,5 +98,4 @@ wsServer.on('connection', function(ws) {
     console.log('Client disconnected...');
     server.removeClient(ws);
   });
-  server.addClient(ws);
 });

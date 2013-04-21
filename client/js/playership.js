@@ -21,10 +21,20 @@ Crafty.c('PlayerShip', {
 
     this.bind('StartShooting', this._shoot);
     this.bind('HitBounds', this.stopMovement);
-
-    setInterval(function() {
-      Crafty.trigger('UpdateShip', this.serialize());
-    }.bind(this), 50);
+    this.bind('Die', function() {
+      Crafty.trigger('DestroyShip');
+    });
   },
+
+  go: function() {
+    this.sendUpdate();
+  },
+
+  sendUpdate: function() {
+    this.timeout(function() {
+      Crafty.trigger('UpdateShip', this.serialize());
+      this.sendUpdate();
+    }, 10);
+  }
 
 } );

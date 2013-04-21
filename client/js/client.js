@@ -1,6 +1,10 @@
 
 var Crafty = require('./lib/crafty'),
-    connect = require('./socket');
+    connect = require('./socket'),
+    slice = Array.prototype.slice;
+
+require('./netship');
+require('./satellite');
 
 module.exports = {
   id: null,
@@ -21,14 +25,16 @@ module.exports = {
     Crafty.bind('UpdateShip', function(ship) {
       this.callMethod('updateShip', ship)();
     }.bind(this));
+    Crafty.bind('DestroyShip', this.callMethod('destroyShip'));
   },
 
   callMethod: function(method /*, params... */) {
+    var params = slice.call(arguments, 1);
     return function() {
       this.socket.send(JSON.stringify({
         id: this.id,
         method: method,
-        params: Array.prototype.slice.call(arguments, 1)
+        params: params
       }));
     }.bind(this);
   },
@@ -49,10 +55,17 @@ module.exports = {
   ships: {},
 
   updateShip: function(id, attr) {
-    if (!this.ships[id]) {
+    if(id === this.id) return;
+    if(!this.ships[id]) {
       this.ships[id] = Crafty.e('NetShip');
     }
     this.ships[id].attr(attr);
+  },
+
+  destroyShip: function(id) {
+    if(id === this.id) return;
+    this.ships[id] && this.ships[id].destroy();
+    delete this.ships[id];
   },
 
   spawn: function(type, attr) {
