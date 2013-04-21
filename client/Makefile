@@ -1,5 +1,5 @@
 
-NOTIFY=1
+NOTIFY=0
 ifeq ($(NOTIFY),1)
 NOTIFY_CMD=terminal-notifier -message "Compiled into build.js" -title "Build done"
 else

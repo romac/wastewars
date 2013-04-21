@@ -4,7 +4,7 @@ var socketState = {
   opened: false,
   connect: function(cb) {
     if(!this.opened) {
-      this.socket = new WebSocket('ws://localhost:8080');
+      this.socket = new WebSocket('ws://' + window.location.hostname + ':8080');
       this.socket.onopen = (function() {
         this.opened = true;
         cb && cb(this.socket);
