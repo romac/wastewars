@@ -6,6 +6,7 @@ require('./loading');
 require('./actor');
 require('./ship');
 require('./planet');
+require('./satellite');
 
 var Game = module.exports = {
 
@@ -26,6 +27,7 @@ Crafty.scene( 'Game', function() {
   this.planet = Crafty.e('Planet');
 
   Crafty.viewport.centerOn(this.planet, 1); 
-} );
+  Crafty.e('Satellite').offscreen().target(this.planet);
+});
 
 window.addEventListener('load', Game.start);
