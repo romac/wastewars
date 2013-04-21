@@ -4,13 +4,15 @@ var Crafty = require('./lib/crafty');
 Crafty.c('Bounded', {
   init: function() {
     this.requires('2D, Canvas');
-    this.bind('EnterFrame', function(from) {
+    this._lastInBoundsPosition = null;
+    this.bind('EnterFrame', function() {
       if(this.isOutOfBounds()) {
-          this.trigger('HitBounds');
-          this.attr({
-            x: from.x, 
-            y: from.y
-          });
+        this.trigger('HitBounds', this._lastInBoundsPosition);
+      } else {
+        this._lastInBoundsPosition = {
+          x: this.x,
+          y: this.y
+        };
       }
     });
   },

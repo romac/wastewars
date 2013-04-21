@@ -5,18 +5,15 @@ require('./offscreen');
 
 Crafty.c('Projectile', {
   init: function() {
-    this.requires('Actor, Color, Offscreen, Collision');
+    this.requires('2D, Canvas, Offscreen, Collision');
     this.attr({
       w: 20,
       h: 20,
-      speed: 3
-    });
-    this.color('#408FD9');
-    this.bind('InBounds', function() {
-      this.removeComponent('Offscreen');
-      this.addComponent('Bounded');
+      speed: 3,
+      damages: 10
     });
     this.bind('EnterFrame', this._enteredFrame);
+    this.onHit('Solid', this._hitObject);
     return this;
   },
 
@@ -39,8 +36,16 @@ Crafty.c('Projectile', {
   },
 
   _enteredFrame: function(frame) {
-    // console.log( 'x:', this.x, 'y:', this.y );
     this.x += Math.cos(this.angle) * this.speed;
     this.y += Math.sin(this.angle) * this.speed;
-  }
+  },
+
+  _hitObject: function(events) {
+    var self = this;
+    if(!events.length) return;
+    events.forEach(function(event) {
+      event.obj.trigger('ProjectileHit', { projectile: self });
+      self.trigger('HitObject', { object: event.obj });
+    });
+  },
 } );

@@ -2,11 +2,12 @@
 var Crafty = require('./lib/crafty');
 
 require( './bounded' );
-require( './shooter' );
+require( './mouseshooter' );
+var throttle = require('./lib/throttle').throttle;
 
 Crafty.c('Ship', {
   init: function() {
-    this.requires('Actor, Bounded, Shooter, Fourway, MouseFace, Color, Collision');
+    this.requires('Actor, Bounded, MouseShooter, Fourway, MouseFace, Color, Collision');
     this.fourway(4);
     this.attr({
       w: 10,
@@ -26,8 +27,16 @@ Crafty.c('Ship', {
       this.rotation = this.curAngle;
     });
 
-    this.bind('MouseUp', function(e) {
-      this.shoot(this._dirAngle + Math.PI, 5);
-    });
+    this.bind('StartShooting', this._shoot);
+    this.bind('HitBounds', this.stopMovement);
+  },
+
+  _shoot: function()
+  {
+    if(!this.isShooting) {
+      return;
+    }
+    this.shoot(this.getAngle(), 5);
+    this.timeout(this._shoot, 80);
   }
 } );

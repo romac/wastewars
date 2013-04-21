@@ -23,7 +23,6 @@ var Game = module.exports = {
       }
     };
     Crafty.stage.fullscreen = true;
-    // Crafty.addEvent(this, window, 'resize', Crafty.viewport.reload);
     Crafty.canvas.init();
     Crafty.background('black');
     Crafty.scene('Loading');
@@ -38,7 +37,9 @@ Crafty.scene('Game', function() {
   this.player.y = -300;
   this.planet = Crafty.e('Planet');
   Crafty.viewport.centerOn(this.planet, 1); 
-  Crafty.e('Satellite').offscreen().target(this.planet);
+  setInterval(function() {
+    Crafty.e('Satellite').offscreen().target(this.planet);
+  }.bind(this), 800);
 });
 
 window.addEventListener('load', Game.start);

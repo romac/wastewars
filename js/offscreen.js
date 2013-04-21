@@ -3,7 +3,7 @@ var Crafty = require('./lib/crafty');
 
 Crafty.c('Offscreen', {
   init: function() {
-    this.requires('2D');
+    this.requires('2D, Canvas');
     this.bind('Moved', function(from) {
       if(this.isInBounds()) {
         this.trigger('InBounds');

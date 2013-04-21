@@ -7,8 +7,12 @@ Crafty.c('Planet', {
     this.origin('center');
     this.circle(50);
     this.color('white');
-    this.bind('BulletHit', this.pulsate('red'));
+    this.bind('ProjectileHit', this._planetWasHit);
+    this.attr({
+      health: 200
+    });
   },
+
   pulsate: function(color) {
     return (function() {
       this.tint(color, 0.3);
@@ -16,5 +20,10 @@ Crafty.c('Planet', {
         this.color('white');
       }.bind(this), 300);
     }).bind(this);
+  },
+
+  _planetWasHit: function(event) {
+    this.pulsate(event.projectile.color());
   }
+
 } );

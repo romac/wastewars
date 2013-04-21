@@ -5,7 +5,6 @@ require('./bounded');
 
 Crafty.c('Bullet', {
 
-  // FIXME: Optimize later, and refactor
   bullet: function(options) {
     if(options.attr) {
       this.attr(options.attr);
@@ -17,28 +16,18 @@ Crafty.c('Bullet', {
   },
 
   init: function() {
-    this.requires('Bounded, Color, Collision');
-    this.attr({
-      w: 3,
-      h: 3,
-      speed: 5
-    });
+    this.requires('Projectile, Color');
     this.color('#FA5656');
     this.bind('EnterFrame', this._enteredFrame);
     this.bind('HitBounds', this.destroy);
-    this.onHit('Solid', this._hitObject);
+    this.bind('HitObject', this.destroy);
+    this.attr({
+      w: 3,
+      h: 3,
+      speed: 5,
+      damages: 1
+    });
     return this;
-  },
-
-  _hitObject: function(e) {
-    if(!e.length || !e[0].obj) return;
-    e[0].obj.trigger('BulletHit', { bullet: this });
-    this.destroy();
-  },
-
-  _enteredFrame: function(frame) {
-    this.x += Math.cos(this.angle) * this.speed;
-    this.y += Math.sin(this.angle) * this.speed;
   }
 
 });
