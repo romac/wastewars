@@ -38,7 +38,7 @@ var server = {
   },
 
   removeClient: function(client) {
-    delete this.clients[client.id];
+    this.clients[client.id] = null;
     this.clientsNum--;
     if(client.ready) {
       this.clientsReady--;
@@ -46,12 +46,17 @@ var server = {
   },
 
   rpc: function(method /*, params... */) {
-    var params = slice.call(arguments, 1);
+    var params = slice.call(arguments, 1),
+        ids = [];
     for(var id in this.clients) {
+      if(ids.indexOf(id) >= 0) {
+        continue;
+      }
       this.clients[id].send(JSON.stringify({
         method: method,
         params: params
       })); 
+      ids.push(id);
     }
   },
 
@@ -60,13 +65,15 @@ var server = {
     this.clients[id].ready = true;
     if(this.clientsReady === this.clientsNum) {
       this.rpc('play');
-      setInterval(function() {
-        this.spawnSatellite(this.clientsReady * 3);
-      }.bind(this), 3000);
+      var loop = function() {
+        this.spawnSatellites(this.clientsReady * 4);
+        setTimeout(loop.bind(this), 3000);
+      };
+      loop.call(this);
     }
   },
 
-  spawnSatellite: function(num) {
+  spawnSatellites: function(num) {
     var size = { w: 20, h: 20 };
     for(var i = 0; i < num; i++) {
       var coords = shared.randomOffscreenCoordinates(viewport, size);

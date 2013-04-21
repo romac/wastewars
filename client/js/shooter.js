@@ -14,8 +14,8 @@ Crafty.c('Shooter', {
   shoot: function(angle, speed) {
     Crafty.e('Bullet').bullet({
       attr: {
-        x: this.x + Math.cos(angle) * Math.max(this.w, this.h),
-        y: this.y + Math.sin(angle) * Math.max(this.w, this.h),
+        x: this.x + Math.cos(angle) * Math.max(this.w+5, this.h+5),
+        y: this.y + Math.sin(angle) * Math.max(this.w+5, this.h+5),
         angle: angle,
         speed: speed || 5
       }

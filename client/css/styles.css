@@ -7,12 +7,18 @@ body {
   margin: 0;
   font-family: Monaco, monospace;
   color: white;
+  background-color: black;
+}
+
+#cr-stage {
+  border: 1px solid #CCC;
+  margin: 100px auto 0 auto;
 }
 
 #fps {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 20px;
   font-size: 24px;
   color: white; 
   background: black;
