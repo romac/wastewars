@@ -1,0 +1,54 @@
+{
+  "name": "wastewars",
+  "description": "The best project ever.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/romac/wastewars",
+  "contributors": [
+    {
+      "name": "Dimiter Petrov",
+      "email": "crackofdusk@gmail.com",
+      "url": "http://github.com/happydawn"
+    },
+    {
+      "name": "Romain Ruetschi",
+      "email": "romain.ruetschi@gmail.com",
+      "url": "http://romac.me"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/romac/wastewars"
+  },
+  "bugs": {
+    "url": "https://github.com/romac/wastewars/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/romac/wastewars/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "./index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt simplemocha"
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0",
+    "should": "~1.2.2",
+    "grunt-contrib-jshint": "~0.4.0",
+    "grunt-simple-mocha": "~0.3.2",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "game"
+  ],
+  "private": true,
+  "dependencies": {
+    "ws": "~0.4.25",
+    "uuid": "~1.4.1"
+  }
+}

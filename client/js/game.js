@@ -36,7 +36,9 @@ Crafty.scene('Game', function() {
   this.player.x = -500;
   this.player.y = -300;
   this.planet = Crafty.e('Planet');
+  
   Crafty.viewport.centerOn(this.planet, 1); 
+  
   setInterval(function() {
     Crafty.e('Satellite').offscreen().target(this.planet);
   }.bind(this), 800);
