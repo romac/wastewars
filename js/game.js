@@ -12,6 +12,18 @@ var Game = module.exports = {
 
   start: function() {
     Crafty.init(Crafty.DOM.window.width, Crafty.DOM.window.height);
+    Crafty.viewport.bounds = {
+      min: {
+        x: -Crafty.viewport.width / 2,
+        y: -Crafty.viewport.height / 2
+      },
+      max: {
+        x: Crafty.viewport.width / 2,
+        y: Crafty.viewport.height / 2
+      }
+    };
+    Crafty.stage.fullscreen = true;
+    // Crafty.addEvent(this, window, 'resize', Crafty.viewport.reload);
     Crafty.canvas.init();
     Crafty.background('black');
     Crafty.scene('Loading');
