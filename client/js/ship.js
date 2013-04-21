@@ -6,16 +6,15 @@ require( './bounded' );
 Crafty.c('Ship', {
   name: 'Ship',
   init: function() {
-    this.requires('Actor, Color, Shooter, Collision');
+    this.requires('Actor, Shooter, Collision, PlayerSprite');
     this.attr({
-      w: 10,
-      h: 20,
+      w: 24,
+      h: 24,
       x: 100,
       y: 100,
       damages: 10,
       curAngle: 0
     });
-    this.color('white');
 
     this.bind('Change', function(props) {
       if(props.isShooting) {

@@ -36,3 +36,7 @@ WasteWars was developped for the 2013 [NASA Space Apps Challenge](http://spaceap
 
 ## License
 WasteWars is released under the [MIT license](http://opensource.org/licenses/MIT).
+Sprites from:  
+- http://opengameart.org/content/spaceships2-top-down
+- http://opengameart.org/content/spaceship-1
+- http://opengameart.org/content/big-space-gun-free-pixel-art-graphics-for-your-game-0
