@@ -12,7 +12,6 @@ Crafty.c('Shooter', {
   },
 
   shoot: function(angle, speed) {
-    console.log(angle, speed);
     Crafty.e('Bullet').bullet({
       attr: {
         x: this.x,

@@ -4,6 +4,7 @@ var Crafty = require('./lib/crafty'),
 
 require('./loading');
 require('./actor');
+require('./health');
 require('./playership');
 require('./planet');
 require('./satellite');
@@ -38,6 +39,8 @@ Crafty.scene('Game', function() {
   this.planet.bind('Die', function() {
     Crafty.trigger('GameOver');
   });
+  Crafty.e('Health').health(this.player);
+  Crafty.e('Health').health(this.planet);
   Crafty.viewport.centerOn(this.planet, 1); 
 });
 
