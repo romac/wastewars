@@ -1,5 +1,5 @@
 
-var Crafty = require( './lib/crafty' );
+var Crafty = require('./lib/crafty');
 
 Crafty.c('Actor', {
   init: function() {

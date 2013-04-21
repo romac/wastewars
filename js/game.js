@@ -32,12 +32,11 @@ var Game = module.exports = {
 
 };
 
-Crafty.scene( 'Game', function() {
+Crafty.scene('Game', function() {
   this.player = Crafty.e('Ship');
   this.player.x = -500;
   this.player.y = -300;
   this.planet = Crafty.e('Planet');
-
   Crafty.viewport.centerOn(this.planet, 1); 
   Crafty.e('Satellite').offscreen().target(this.planet);
 });

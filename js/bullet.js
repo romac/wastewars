@@ -13,6 +13,7 @@ Crafty.c('Bullet', {
     if(options.color) {
       this.color(options.color);
     }
+    return this;
   },
 
   init: function() {
@@ -26,6 +27,7 @@ Crafty.c('Bullet', {
     this.bind('EnterFrame', this._enteredFrame);
     this.bind('HitBounds', this.destroy);
     this.onHit('Solid', this._hitObject);
+    return this;
   },
 
   _hitObject: function(e) {

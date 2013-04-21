@@ -1,5 +1,5 @@
  
-var Crafty = require( './lib/crafty' );
+var Crafty = require('./lib/crafty');
 
 exports.FPS = function( el, maxValue )
 {
