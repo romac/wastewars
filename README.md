@@ -9,7 +9,6 @@ Your and your teammates' mission is to protected the planet by destroying those 
 The story might be a little far-fetched and not so realistic, but the main point of that game was to have fun developing it, hoping that you will have as much fun playing it. And also that you may now be a little bit more aware of how crowded the geostationary orbit is.
 
 ## Usage
-
 We sadly didn't have time to put a version online somewhere due to the many limitations of the actual game.
 However, if you want to play it on your own machine/local network, follow the instructions below:
 
@@ -25,6 +24,9 @@ $ cd ../client; python -m SimpleHTTPServer &
 ```
 
 Then, open `http://YOUR-IP:8000` on your and your friends' computers, and play together!
+
+## Screenshot
+![](screenshot.png)
 
 ## Authors
 - Dimiter Petrov
