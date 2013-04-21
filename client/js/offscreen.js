@@ -1,5 +1,6 @@
 
-var Crafty = require('./lib/crafty');
+var Crafty = require('./lib/crafty'),
+    shared = require('../../shared');
 
 Crafty.c('Offscreen', {
   init: function() {
@@ -26,12 +27,6 @@ Crafty.c('Offscreen', {
   },
 
   randomOffscreenCoordinates: function() {
-    var angle = Math.random() * 2 * Math.PI,
-        radius = Math.max(Crafty.viewport.width / 2, Crafty.viewport.height / 2)
-               + Math.max(this.w, this.h);
-    return {
-      x: radius * Math.cos(angle),
-      y: radius * Math.sin(angle)
-    };
+    return shared.randomOffscreenCoordinates(Crafty.viewport, this);
   }
 } );

@@ -14,10 +14,12 @@ Crafty.c('Satellite', {
     this.color('#408FD9');
     this.bind('HitBounds', this.destroy);
     this.bind('HitObject', this.destroy);
-    this.offscreen().target(Crafty('Planet'));
     this.attr({
       health: 2,
       damages: 10
     });
+  },
+  go: function() {
+    this.target(Crafty('Planet'));
   }
 } );

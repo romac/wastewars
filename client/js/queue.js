@@ -9,6 +9,7 @@ Crafty.scene('Queue', function() {
       if(e.key !== Crafty.keys.SPACE) {
         return;
       }
-      Crafty.scene('Game');
+      this.text('Waiting for others...');
+      Crafty.trigger('Ready');
     });
 });

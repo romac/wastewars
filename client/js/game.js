@@ -32,11 +32,18 @@ var Game = module.exports = {
 
 Crafty.scene('Game', function() {
   this.player = Crafty.e('Ship');
-  this.player.x = -500;
-  this.player.y = -300;
+  this.player.x = -200;
+  this.player.y = -100;
   this.planet = Crafty.e('Planet');
+  this.planet.bind('Die', function() {
+    Crafty.trigger('GameOver');
+  });
   
   Crafty.viewport.centerOn(this.planet, 1); 
+});
+
+Crafty.bind('GameOver', function() {
+  Crafty.stop();
 });
 
 window.addEventListener('load', Game.start);
