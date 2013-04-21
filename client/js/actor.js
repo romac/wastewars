@@ -34,7 +34,7 @@ Crafty.c('Actor', {
     }
   },
 
-  _wasHit: function( event ) {
+  _wasHit: function(event) {
     var newHealth = this.health - event.projectile.damages;
     this.attr('health', newHealth);
     this.trigger('Wound', { health: newHealth, damages: event.projectile.damages });

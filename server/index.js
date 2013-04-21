@@ -61,10 +61,16 @@ var server = {
     if(this.clientsReady === this.clientsNum) {
       this.rpc('play');
       setInterval(function() {
-        var size = { w: 20, h: 20 },
-            coords = shared.randomOffscreenCoordinates(viewport, size);
-        server.rpc('spawn', 'Satellite', {x: coords.x, y: coords.y, w: size.w, h: size.h});
-      }, 1000);
+        this.spawnSatellite(this.clientsReady * 3);
+      }.bind(this), 3000);
+    }
+  },
+
+  spawnSatellite: function(num) {
+    var size = { w: 20, h: 20 };
+    for(var i = 0; i < num; i++) {
+      var coords = shared.randomOffscreenCoordinates(viewport, size);
+      server.rpc('spawn', 'Satellite', {x: coords.x, y: coords.y, w: size.w, h: size.h});
     }
   },
 
@@ -77,7 +83,7 @@ var server = {
   },
 
   gameOver: function(id) {
-    console.log('GameOVER!');
+    console.log('Game OVER!');
   }
 };
 
@@ -85,7 +91,6 @@ wsServer.on('connection', function(ws) {
   console.log('Client connected!');
   server.addClient(ws);
   ws.on('message', function(msg) {
-    console.log('Received: %s', msg);
     var data = JSON.parse(msg);
     if(!data || !data.method || !server[data.method]) {
       console.error('Error: cannot call method: ', data && data.method);

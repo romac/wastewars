@@ -40,7 +40,7 @@ Crafty.c('Ship', {
 
   _shoot: function()
   {
-    this.timeout(this._shoot, 80);
+    this.timeout(this._shoot, 120);
     if(!this.isShooting) {
       return;
     }

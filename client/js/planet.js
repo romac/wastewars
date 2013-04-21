@@ -22,7 +22,7 @@ Crafty.c('Planet', {
   },
 
   _planetWasHit: function(event) {
-    this.pulsate(event.projectile.color());
+    this.pulsate('red');
   }
 
 } );

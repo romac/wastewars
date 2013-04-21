@@ -9,6 +9,9 @@ Crafty.c('Bullet', {
     if(options.attr) {
       this.attr(options.attr);
     }
+    if(options.emitter) {
+      this.emitter = options.emitter;
+    }
     if(options.color) {
       this.color(options.color);
     }
@@ -17,7 +20,7 @@ Crafty.c('Bullet', {
 
   init: function() {
     this.requires('Projectile, Color');
-    this.color('#FA5656');
+    this.color('#6FB2FF');
     this.bind('EnterFrame', this._enteredFrame);
     this.bind('HitBounds', this.destroy);
     this.bind('HitObject', this.destroy);

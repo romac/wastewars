@@ -11,12 +11,13 @@ Crafty.c('Satellite', {
       this.removeComponent('Offscreen');
       this.addComponent('Bounded');
     });
-    this.color('#408FD9');
+    this.color('#B70011');
     this.bind('HitBounds', this.destroy);
     this.bind('HitObject', this.destroy);
     this.attr({
       health: 2,
-      damages: 10
+      damages: 10,
+      speed: 3
     });
   },
   go: function() {
