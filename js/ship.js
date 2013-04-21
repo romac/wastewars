@@ -6,6 +6,7 @@ require( './mouseshooter' );
 var throttle = require('./lib/throttle').throttle;
 
 Crafty.c('Ship', {
+  name: 'Ship',
   init: function() {
     this.requires('Actor, Bounded, MouseShooter, Fourway, MouseFace, Color, Collision');
     this.fourway(4);
@@ -14,6 +15,7 @@ Crafty.c('Ship', {
       h: 20,
       x: 100,
       y: 100,
+      damages: 10,
       curAngle: 0
     });
     this.origin('center');

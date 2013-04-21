@@ -2,6 +2,7 @@
 var Crafty = require('./lib/crafty');
 
 Crafty.c('Planet', {
+  name: 'Planet',
   init: function() {
     this.requires('Actor, Shape, Solid, Color, Collision, Tint');
     this.origin('center');
@@ -14,12 +15,10 @@ Crafty.c('Planet', {
   },
 
   pulsate: function(color) {
-    return (function() {
-      this.tint(color, 0.3);
-      this.timeout(function() {
-        this.color('white');
-      }.bind(this), 300);
-    }).bind(this);
+    this.tint(color, 0.5);
+    this.timeout(function() {
+      this.color('white');
+    }.bind(this), 200);
   },
 
   _planetWasHit: function(event) {

@@ -3,7 +3,7 @@ var Crafty = require('./lib/crafty');
 
 Crafty.c('Actor', {
   init: function() {
-    this.requires('2D, Canvas');
+    this.requires('2D, Canvas, Solid');
     this.attr({
       health: 100
     });
@@ -37,6 +37,7 @@ Crafty.c('Actor', {
   _wasHit: function( event ) {
     var newHealth = this.health - event.projectile.damages;
     this.attr('health', newHealth);
+    this.trigger('Wound', { health: newHealth, damages: event.projectile.damages });
     if( newHealth <= 0 ) {
       this.trigger('Die');
     }
